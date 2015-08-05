@@ -38,13 +38,13 @@ In this guide we will be using a library called [tape](https://github.com/substa
 
 In contrast to more feature-rich testing frameworks, like Jasmine, tap(e) doesn't provide a lot of bells and whistles. It does not include a feature-rich DSL that allows you to easily de-duplicate setup logic, such as `beforeEach` methods. Instead it sacrifices those little convenient "nice-to-have" features for simplicity and modularity, which is perfect for a tutorial or when writing small, reusable modules (which is what you should be doing anyways).
 
-| Name | Philosophy | Author | Used by | Client-side | Server-side | Stars
-|-|
-| [Mocha](http://mochajs.org/) | feature-rich | [tj](https://github.com/tj) | [express](https://github.com/strongloop/express/tree/master/test) | yes | yes | 7,132
-| [Jasmine](http://jasmine.github.io/) | DOM-less | [Pivotal Labs](https://github.com/pivotal) | [Diaspora](https://github.com/diaspora/diaspora), [...](https://github.com/jasmine/jasmine/wiki/Who's-using-jasmine) | yes | yes |  9,229
-| [QUnit](https://qunitjs.com/) | Ease of use | [jQuery](https://jquery.com/) |  [jQuery](https://github.com/jquery/jquery/tree/master/test), [jQuery Mobile](https://github.com/jquery/jquery-mobile) | yes | yes* | 3,226
-| [tape](https://www.npmjs.com/package/tape) | [TAP](https://testanything.org/), modular | [substack](https://github.com/substack) | [isomorphic modules](https://www.npmjs.com/browse/depended/tape) | yes | yes | 1,059
-| [tap](https://www.npmjs.com/package/tap) | [TAP](https://testanything.org/), modular | [isaacs](https://github.com/isaacs) | [npm](https://github.com/npm/npm/tree/master/test/tap), [browserify](https://github.com/substack/node-browserify/tree/master/test) | no | yes | 516
+| Name                                       | Philosophy                                | Author                                     | Used by                                                                                                                            | Client-side | Server-side | Stars |
+|:-------------------------------------------|:------------------------------------------|:-------------------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------|:------------|:------------|:------|
+| [Mocha](http://mochajs.org/)               | feature-rich                              | [tj](https://github.com/tj)                | [express](https://github.com/strongloop/express/tree/master/test)                                                                  | yes         | yes         | 7,132 |
+| [Jasmine](http://jasmine.github.io/)       | DOM-less                                  | [Pivotal Labs](https://github.com/pivotal) | [Diaspora](https://github.com/diaspora/diaspora), [...](https://github.com/jasmine/jasmine/wiki/Who's-using-jasmine)               | yes         | yes         | 9,229 |
+| [QUnit](https://qunitjs.com/)              | Ease of use                               | [jQuery](https://jquery.com/)              | [jQuery](https://github.com/jquery/jquery/tree/master/test), [jQuery Mobile](https://github.com/jquery/jquery-mobile)              | yes         | yes*        | 3,226 |
+| [tape](https://www.npmjs.com/package/tape) | [TAP](https://testanything.org/), modular | [substack](https://github.com/substack)    | [isomorphic modules](https://www.npmjs.com/browse/depended/tape)                                                                   | yes         | yes         | 1,059 |
+| [tap](https://www.npmjs.com/package/tap)   | [TAP](https://testanything.org/), modular | [isaacs](https://github.com/isaacs)        | [npm](https://github.com/npm/npm/tree/master/test/tap), [browserify](https://github.com/substack/node-browserify/tree/master/test) | no          | yes         | 516   |
 
 Stars are not a good approximation for judging the quality of open-source projects, but provide some insight into the popularity and overall usage.
 
