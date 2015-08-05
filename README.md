@@ -21,22 +21,22 @@ Table of Contents
 Introduction
 ------------
 
-Testing is essential for building reliable, maintainable modules. On the other hand, testing isn't "fun" and might take longer than implementing the business logic itself, which can be annoying at times.
+Testing is essential when building reliable, maintainable modules and applications. On the other hand, testing isn't "fun" and might take longer than implementing the business logic itself, which can be annoying at times.
 
 Even worse, testing the "wrong" things can actually slow down development processes and make large-scale refactors and code polishing harder.
 
-The goal therefore shouldn't be to have "100 % test coverage" or other hard numbers. You should aim for testing functionality on a level "that makes sense". Testing internal implementations might make applications more correct, but doesn't necessarily make code quality better on a longer term (who would want to rewrite all those tests after all?).
+The goal therefore shouldn't be to have "100 % test coverage" or other hard, management-enforced numbers. Tests should make your life easier. You should aim for testing functionality on a level "that makes sense". Testing internal implementations might make applications more correct, but doesn't necessarily make code quality better on a longer term (who would want to rewrite all those tests after all if you can just ignore that code smell?).
 
 This guide aims to establish some conventions on how to write "useful" tests in a highly-dyncamic language that allows you to do all kinds of crazy stuff.
 
 Testing Stacks
 --------------
 
-There is a multitude of different testing frameworks being used for writing unit tests. The following table lists a couple of them. It doesn't claim to be complete, but gives a rough overview of the available options.
+There is a multitude of different testing frameworks being used for writing  tests. The following table lists a couple of them. It doesn't claim completeness, but gives a rough overview of the available options.
 
 In this guide we will be using a library called [tape](https://github.com/substack/tape) for sample code.
 
-In contrast to more feature-rich testing frameworks, like Jasmine, tap(e) doesn't provide a lot of bells and whistles. It does not include a feature-rich DSL that allows you to easily de-duplicate setup logic, such as `beforeEach` methods. Instead it sacrifices those little convenient "nice-to-have" features for simplicity and modularity, which is perfect for a tutorial or when writing small, reusable modules.
+In contrast to more feature-rich testing frameworks, like Jasmine, tap(e) doesn't provide a lot of bells and whistles. It does not include a feature-rich DSL that allows you to easily de-duplicate setup logic, such as `beforeEach` methods. Instead it sacrifices those little convenient "nice-to-have" features for simplicity and modularity, which is perfect for a tutorial or when writing small, reusable modules (which is what you should be doing anyways).
 
 | Name | Philosophy | Author | Used by | Client-side | Server-side | Stars
 |-|
@@ -53,7 +53,7 @@ Unit tests, integration tests, BDD, TDD
 
 In an ideal world, everything should be tested. In fact, a lot of people are of the opinion that you should write your tests before actually implementing your solution. This idea has been around for a long, long time, but now people gave it fancy names, like [TDD](https://en.wikipedia.org/wiki/Test-driven_development) or [BDD](https://en.wikipedia.org/wiki/Behavior-driven_development).
 
-Also some people claim there is a big difference between the two, there really isn't. BDD is basically TDD "done right". When writing your tests before actually writing "real" code, you're typically tempted to write tests that are too specific, in the sense of testing internals instead of behavior. This makes refactoring despite the large number of available tests hard and even changes to the tests themselves might be required. When people realized that, they basically came up with this fancy term called "BDD". The "B" stands for behavior, explicitly emphasizing the lack of **internal** tests. Internal tests are hard to maintain due to their implementation specific nature.
+Also some claim there is a big difference between the two, there really isn't. BDD is basically TDD "done right". When writing your tests before actually writing "real" code, you're typically tempted to write tests that are too specific, in the sense of testing internals instead of *behavior*. This makes refactoring despite the large number of available tests harder and even changes to the tests themselves might be required. When people realized that, they basically came up with this fancy term called "BDD". The "B" stands for behavior, explicitly emphasizing the lack of **internal** tests. Internal tests are hard to maintain due to their implementation specific nature.
 
 In general, when talking about tests, the following concepts come up over and over again:
 
@@ -69,7 +69,7 @@ As the name suggests, the tests are an integral part of the development process 
 
 Truth being told, everyone is confused about TDD vs. BDD. Reason being that there is no big difference (if any).
 
-Here are some excerpts on what difference people think the difference is:
+Here are some excerpts describing how both concepts are being contrasted against each other:
 
 > That's wrong. BDD and TDD have absolutely nothing whatsoever to do with testing. None. Nada. Zilch. Zip. Nix. Not in the slightest.
 > BDD is just TDD with different words. If you do TDD right, you are doing BDD. The difference is that – provided you believe at least in the weak form of the Sapir-Whorf Hypothesis – the different words make it easier to do it right.
@@ -104,16 +104,16 @@ An example unit test might look something like this:
 
 ### Integration tests
 
-Ok, so you tested all your individual classes, modules and functions. Now you're typically glueing your application together. This brings its own challenge with it: Testing how the modules **integrate** with each other. While unit tests cover individual parts of your application, integration tests ensure that the independent modules work correctly "with" each other. This might involve testing in a browser environment.
+Ok, so you tested all your individual classes, modules and functions. Now you're typically glueing your application together. This brings its own challenges with it: Testing how the modules **integrate** with each other. While unit tests cover individual parts of your application, integration tests ensure that the independent modules work correctly "with" each other. This might involve testing in a browser environment.
 
 ### Visual Regression Tests
 
-Visual regression tests are a kind of integration test. They ensure that your application doesn't "look" broken. They are useful for ensuring cross-browser compatibility, but are hard to maintain. Automated visual tests aren't *that* wide-spread, but are definitely useful.
+Visual regression tests are in some way a kind of integration test. They ensure that your application doesn't "look" broken. They are useful for ensuring cross-browser compatibility, but are hard to maintain. Automated visual tests aren't *that* wide-spread, but are definitely useful.
 
 Writing our first test case
 ---------------------------
 
-Since it's oftentimes almost impossible to come up with tests before playing with the problem at hand with some sample code, I usually just write some very simple tests. E.g. testing if a function returns an object.
+Since it's oftentimes almost impossible to come up with tests before playing with the problem at hand with some sample code, I usually start out with some very simple tests. E.g. testing if a function returns an object.
 
 I start out with an empty test and source file, e.g. `widget_spec.js`:
 
@@ -126,13 +126,17 @@ test('Widget', function (t) {
 })
 ```
 
-When writing server-side tests, I usually now use [`nodemon`](https://www.npmjs.com/package/nodemon), when running tests in a browser environment, I tend to use [`hihat`](https://www.npmjs.com/package/hihat). Both solutions auto-run your test suite, which adds up after some time.
+When writing server-side tests, I usually use [`nodemon`](https://www.npmjs.com/package/nodemon), when running tests in a browser environment, I tend to use [`hihat`](https://www.npmjs.com/package/hihat). Both solutions auto-run your test suite, which adds up after some time.
 
 ```
+  # browser
   hihat widget_test.js
+
+  # server
+  nodeon server_widget_test.js  
 ```
 
-Now we want out widget to have a method called `appendTo`. The `appendTo` method should append the widget to the passed in Element. Writing a test for this is trivial:
+Now we want our widget to have a method called `appendTo`. The `appendTo` method should append the widget to the passed in Element. Writing a test for this is trivial:
 
 ```js
 test('Widget', function (t) {
@@ -155,7 +159,7 @@ test('Widget', function (t) {
 })
 ```
 
-Now while this is typically a good way to start, we can do better. One of the issues with the test above is that we don't know if the test does anything else to the container element. E.g. maybe it adds a red border or does something else to it other than appending itself.
+Now while this is typically a good way to start, we can do better. One of the issues with the test above is that we don't know if the test does anything else to the container element. E.g. maybe it adds a red border or does something else to it other than appending itself (which would be terribly annoying).
 
 In the above case we could simply mock the container. Oftentimes a mocking framework like [Sinon.JS](http://sinonjs.org/) is quite handy in such cases, but in this case our mock container is very simply and we can write the mock manually:
 
@@ -180,9 +184,9 @@ test('Widget', function (t) {
 })
 ```
 
-As you can see above, we added a couple of insertions in the container's appendChild function. We check if the child that is being appended is the widget's element (`widget.$el`).
+As you can see above, we added a couple of assertions in the container's appendChild function. We check if the child that is being appended is the widget's element (`widget.$el`).
 
-Another change worth being mentioned is that we are now no longer using `t.end`. Since our test is asynchronous, the container might not append itself immediately, but might wait some time. In that case ending the test before appending the widget would be problematic.
+Another change worth being mentioned is that we are now no longer using `t.end`. Since our test is asynchronous, the container might not append itself immediately, but could wait some time. In that case ending the test before appending the widget would be problematic.
 
 In order to avoid such a case, we "plan" beforehand how many assertions we want to make (`t.plan(3)`). Our test will be ended as soon as tape encountered three assertions, which is the case right after the container's `appendChild` method has been invoked.
 
@@ -191,11 +195,11 @@ Structuring Tests
 
 ### Directory structure
 
-Ok, so now we wrote our first test and we are happy with it, but there is kind of like a administrative questions: Where should we put all those test file?
+Ok, so now we wrote our first test and we are happy with it, but there is kind of like an administrative question now: Where should we put all those test files?
 
 There are a couple of options:
 
-1. Putting them into the same dir as the file being tested, e.g. as `widget_test.js` of `widget.spec.js`
+1. Putting them into the same dir as the file being tested, e.g. as `widget_test.js` and `widget.spec.js`
 
 2. Putting them into a separate `__test__`, `test` or `spec` dir at the root level of your application (and therefore replicating your directory structure) or in each subdirectory
 
@@ -260,7 +264,7 @@ Golden Rules of Testings
 
 * Never test internals
 
-  Testing implementation instead of behavior/ functionality leads to unmaintainable code and realistically simply leads to redundant implementations. Don't assert the state of private properties, but concentrate on public APIs of possibly internal modules. E.g. it's perfectly fine to test a utility module that you are using internally, but it is not a good idea to concentrate the inner workings of a function.
+  Testing implementation instead of behavior/ functionality leads to unmaintainable code and realistically encourages redundant implementations. Don't assert the state of private properties, but concentrate on public APIs of possibly internal modules. E.g. it's perfectly fine to test an utility module that you are using internally, but it is not a good idea to concentrate on the inner workings of a function.
 
   E.g. when testing the function `isPrime`, your test case should not be concerned with how the function actually works, instead it should concentrate on relevant test cases.
 
@@ -280,7 +284,7 @@ Golden Rules of Testings
 
 * Make your tests deterministic
 
-  Don't randomize input. Concentrate on a couple of a bunch of relevant corner cases instead. One of the most important characteristic of a good test suite is that it's predictable. Tests should **always** be reproducible, otherwise there is no way you can effectively isolate a bug.
+  Don't randomize input. Concentrate on a couple of a bunch of relevant corner cases instead. One of the most important characteristics of a good test suite is that it's predictable. Tests should **always** be reproducible, otherwise there is no way you can effectively isolate a bug.
 
 * No global state
 
