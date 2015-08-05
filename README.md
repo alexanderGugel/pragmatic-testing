@@ -1,9 +1,9 @@
-A Pragmatic Guide to Testing
-============================
+A Pragmatic Guide on How to Test JavaScript Modules and Applications
+====================================================================
 
 The goal of this guide is to provide a few simple, easy to follow guidelines on how to write tests. Currently this document specifically covers testing of JavaScript projects, but most aspects should apply to other languages as well.
 
-This guide is intended for readers that had *some* exposure to JavaScript before. It features some rather opinionated standpoints and seasoned developers *might want to take it with a grain of salt*.
+It is intended for readers that had *some* exposure to JavaScript before. It features some rather opinionated standpoints and seasoned developers *might want to take it with a grain of salt*.
 
 Additions and other perspectives are welcome and everyone is encouraged to contribute to this guide.
 
