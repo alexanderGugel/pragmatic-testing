@@ -10,13 +10,13 @@ Additions and other perspectives are welcome and everyone is encouraged to contr
 Table of Contents
 -----------------
 
-- Introduction
-- Testing Stacks
-- Unit tests, integration tests, BDD, TDD
-- Writing our first test case
-- Structuring Tests
-- Golden Rules of Testings
-- Further Reading
+- [Introduction](#introduction)
+- [Testing Stacks](#testing-stacks)
+- [Unit tests, integration tests, BDD, TDD](#unit-tests-integration-tests-bdd-tdd)
+- [Writing our first test case](#writing-our-first-test-case)
+- [Structuring Tests](#structuring-tests)
+- [Golden Rules of Testings](#golden-rules-of-testings)
+- [Further Reading](#further-reading)
 
 Introduction
 ------------
