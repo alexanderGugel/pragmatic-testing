@@ -133,7 +133,7 @@ When writing server-side tests, I usually use [`nodemon`](https://www.npmjs.com/
   hihat widget_test.js
 
   # server
-  nodeon server_widget_test.js  
+  nodemon server_widget_test.js  
 ```
 
 Now we want our widget to have a method called `appendTo`. The `appendTo` method should append the widget to the passed in Element. Writing a test for this is trivial:
